@@ -1,0 +1,7 @@
+common/bash/local
+common/dotsubversion/auth
+.DS_Store
+*.sw?
+common/dotvim/.netrw*
+common/dotvim/bundle/*
+common/dotansible/cp

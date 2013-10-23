@@ -1,0 +1,16 @@
+# You most likely want these
+Protocol 2
+ForwardAgent yes
+
+# a dev network you don't care about key checking on
+# host 192.168.1.*
+# stricthostkeychecking no
+# userknownhostsfile /dev/null
+
+# jumphost for example
+# host jumphost
+# hostname BLAH
+
+# example
+# host example
+# proxycommand ssh -q jumphost nc %h %p
