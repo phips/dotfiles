@@ -1,12 +1,14 @@
 #!/bin/bash
 
 function relink() {
-    if [ -d $1 ]; then
-        rm -rf $1
-    elif [ -f $1 -o -L $1 ]; then
-      rm $1
+    if [ -f $2 ]; then
+        if [ -d $1 ]; then
+            rm -rf $1
+        elif [ -f $1 -o -L $1 ]; then
+          rm $1
+        fi
+        ln -sn $2 $1
     fi
-    ln -sn $2 $1
 }
 
 PROFILE=$1
