@@ -1,11 +1,1 @@
-for i in $(grep ^https 00README) ; do git clone $i ; done
-update:
-for i in $(grep ^https 00README) ; do cd $(basename $i);git pull ;cd .. ;done
-
-https://github.com/tpope/vim-repeat
-https://github.com/tpope/vim-surround
-https://github.com/scrooloose/syntastic
-https://github.com/vim-scripts/loremipsum
-https://github.com/vim-perl/vim-perl
-https://github.com/majutsushi/tagbar
-https://github.com/elzr/vim-json
+https://github.com/gmarik/vundle

@@ -5,6 +5,17 @@ set nocompatible
 
 set term=xtermc
 
+" https://github.com/gmarik/vundle.git
+set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+call vundle#rc()
+let g:vundle_default_git_proto='https'
+"
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+"
+
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 set nobackup        " do not keep a backup file, use versions instead
@@ -153,3 +164,12 @@ EOF
 endif
 
 noremap <Leader>t :TagbarToggle<CR>
+
+" Install bundles
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'scrooloose/syntastic'
+Bundle 'vim-perl/vim-perl'
+Bundle 'majutsushi/tagbar'
+Bundle 'elzr/vim-json'
+Bundle 'Lokaltog/powerline'
