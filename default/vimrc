@@ -53,6 +53,9 @@ endif
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
 
+  " YAML file editing, change tab stops
+  autocmd FileType yaml setlocal ts=2 sw=2
+
   au! BufRead,BufNewFile *.pp     setfiletype puppet
 
   " Enable file type detection.
