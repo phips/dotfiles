@@ -7,7 +7,6 @@ set term=xtermc
 
 " https://github.com/gmarik/vundle.git
 set rtp+=~/.vim/bundle/vundle/
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 call vundle#rc()
 let g:vundle_default_git_proto='https'
 "
@@ -129,9 +128,6 @@ map Y y$
 " matchit
 source $VIMRUNTIME/macros/matchit.vim
 
-" kickstart
-source $HOME/.vim/syntax/kickstart.vim
-
 " statusline
 set stl=%<%f\ %{SyntasticStatuslineFlag()}\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 let g:syntastic_enable_balloons = 1
@@ -141,38 +137,13 @@ let g:syntastic_auto_loc_list = 1
 " let g:netrw_scp_cmd='f:\apps\pscp.exe -q -batch -agent -l USERID'
 " let g:netrw_ssh_cmd='f:\apps\plink.exe'
 
-let g:tagbar_type_puppet = {
-    \ 'ctagstype': 'puppet',
-    \ 'kinds': [
-        \'c:class',
-        \'s:site',
-        \'n:node',
-        \'d:definition'
-      \]
-    \}
-
-
-if has('perl')
-    command! ReverseWord call ReverseWord()
-    function! ReverseWord()
-    perl << EOF
-        $curword  = VIM::Eval('expand("<cword>")');
-        $reversed = reverse($curword);
-        VIM::Msg("$curword => $reversed");
-        VIM::DoCommand("norm lbcw$reversed");
-EOF
-    endfun
-    " default Leader is \
-    nmap <Leader>r :ReverseWord<CR>
-endif
-
-noremap <Leader>t :TagbarToggle<CR>
-
 " Install bundles
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/syntastic'
+Bundle 'vim-scripts/loremipsum'
 Bundle 'vim-perl/vim-perl'
-Bundle 'majutsushi/tagbar'
 Bundle 'elzr/vim-json'
-Bundle 'Lokaltog/powerline'
+Bundle 'bling/vim-airline'
+Bundle 'chase/vim-ansible-yaml'
+Bundle 'tangledhelix/vim-kickstart'
