@@ -3,8 +3,6 @@
 " vim: set bg=dark ts=2 sw=2 et:
 set nocompatible
 
-set term=xtermc
-
 " https://github.com/gmarik/vundle.git
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -119,9 +117,6 @@ set bg=dark
 set wildmenu
 set wildmode=list:longest,full
 
-" https://github.com/tpope/vim-pathogen
-call pathogen#infect()
- 
 " shift-Y yanks to EOL, not whole line
 map Y y$
 
