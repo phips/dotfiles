@@ -35,16 +35,22 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-if &term =~ "xterm"
-  if has("terminfo")        
+if has("terminfo")
+  if &term =~ "screen"
+    set t_Co=256
+  elseif &term =~ "xtermc"
+    set t_Co=256
+  elseif &term =~ "xterm-256color"
+    set t_Co=256
+  elseif &term =~ "xterm"
     set t_Co=8
-    set t_Sf=[3%p1%dm  
-    set t_Sb=[4%p1%dm  
+    set t_Sf=^[[3%p1%dm
+    set t_Sb=^[[4%p1%dm
   else
-    set t_Co=8              
-    set t_Sf=[3%dm     
-    set t_Sb=[4%dm     
-  endif 
+    set t_Co=8
+    set t_Sf=^[[3%dm
+    set t_Sb=^[[4%dm
+  endif
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -141,3 +147,4 @@ Bundle 'bling/vim-airline'
 Bundle 'stephpy/vim-yaml'
 Bundle 'chase/vim-ansible-yaml'
 Bundle 'tangledhelix/vim-kickstart'
+" < 7.4 Bundle 'hallison/vim-markdown'
