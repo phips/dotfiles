@@ -1,7 +1,3 @@
-common/bash/local
-common/dotsubversion/auth
 .DS_Store
+.nova
 *.sw?
-common/dotvim/.netrw*
-common/dotvim/bundle/*
-common/dotansible/cp

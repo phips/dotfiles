@@ -1,0 +1,30 @@
+{
+  "name": "my-snippets",
+  "contributes": {
+    "snippets": [
+      {
+        "language": [
+          "javascript",
+          "typescript"
+        ],
+        "path": "./js.json"
+      },
+      {
+        "language": "html",
+        "path": "html.json"
+      },
+      {
+        "language": "python",
+        "path": "./python.json"
+      },
+      {
+        "language": "toml",
+        "path": "./toml.json"
+      },
+      {
+        "language": "all",
+        "path": "all.json"
+      }
+    ]
+  }
+}

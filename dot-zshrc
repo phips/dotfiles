@@ -1,0 +1,79 @@
+# vim: set ft=zsh:
+zstyle :compinstall filename '$HOME/.zshrc'
+autoload -Uz compinit && compinit
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+[ "$HISTSIZE" -lt 50000 ] && HISTSIZE=50000
+[ "$SAVEHIST" -lt 10000 ] && SAVEHIST=10000
+
+bindkey -e
+setopt braceccl               # expand num ranges {1..4}
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt share_history          # share command history across active sessions
+setopt autocd
+
+export LESS_TERMCAP_us=$'\e[01;38;5;208m'         # Underlined text
+export LESS_TERMCAP_mb=$'\e[01;38;5;196m'         # Bold text
+export LESS_TERMCAP_md=$'\e[01;38;5;44m'          # Bold text
+export LESS_TERMCAP_so=$'\e[01;48;5;233;38;5;51m' # Standout text
+export LESS_TERMCAP_fg=$'\e[38;5;15m'             # Bright white text (XTerm Color 15)
+export LESS_TERMCAP_fg=$'\e[38;5;145m'            # light grayish text
+export LESS_TERMCAP_me=$'\e[0m'                   # End bold/underline formatting
+export LESS_TERMCAP_ue=$'\e[0m'                   # End underlined text
+export LESS_TERMCAP_se=$'\e[0m'                   # End standout text
+export LESS="--RAW-CONTROL-CHARS"
+
+if [ -d $HOME/perl5 ]; then
+    PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+    PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+    PERL_MB_OPT="--install_base \"$HOME/perl5\""
+    PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
+    export PERL5LIB PERL_LOCAL_LIB_ROOT PERL_MB_OPT PERL_MM_OPT
+fi
+
+paths=(
+  "$HOME/go/bin"
+  "$HOME/.cargo/bin"
+  "$HOME/.local/bin"
+  "$HOME/perl5/bin"
+)
+for p in ${paths[@]}; do
+  if [[ -d "$p" ]]; then
+    PATH="$PATH:$p"
+  fi
+done
+
+EDITOR="vi"
+if command -v nvim >/dev/null 2>&1; then
+  EDITOR="nvim"
+  alias v=nvim
+fi
+export EDITOR PATH
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+    export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
+else
+    export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
+fi
+
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
+[ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
+[ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+
+# aliases
+alias ez='nvim ~/.zshrc'
+alias rz='source ~/.zshrc'
+alias j=jobs
+alias l='ls -GlaF'
+alias lr='ls -FartlG'
+
