@@ -1,4 +1,0 @@
-defscrollback 10000
-setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
-bind . select 2
-screen -t shell 2

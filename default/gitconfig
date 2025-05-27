@@ -1,8 +1,0 @@
-[color]
-    ui = auto
-[alias]
-    st = status
-    co = checkout
-    ci = commit -a
-    up = pull origin master
-    unstage = reset HEAD --
