@@ -53,19 +53,24 @@ if command -v nvim >/dev/null 2>&1; then
 fi
 export EDITOR PATH
 
+init_tool() {
+  local tool=$1
+  shift
+  
+  if command -v "$tool" >/dev/null 2>&1; then
+    eval "$($tool "$@")"
+  fi
+}
+
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
 
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init zsh)"
-fi
-
-if command -v fzf >/dev/null 2>&1; then
-  source <(fzf --zsh)
-fi
+init_tool starship init zsh
+init_tool fzf --zsh
+init_tool zoxide init zsh
 
 [ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
