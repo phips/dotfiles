@@ -64,6 +64,8 @@ init_tool() {
 
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
+elif [ "$TERM" = "tmux-256color" ]; then
+    export STARSHIP_CONFIG="$HOME/.config/starship/gruvbox.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
