@@ -1,8 +1,13 @@
 require("mason").setup()
 
-require("mason-tool-installer").setup({
+require("mason-lspconfig").setup({
     ensure_installed = {
         "terraform-ls",
+    }
+})
+
+require("mason-tool-installer").setup({
+    ensure_installed = {
         "ansible-language-server",
         "tailwindcss-language-server",
         "terraform",
