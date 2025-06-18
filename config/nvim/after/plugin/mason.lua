@@ -2,8 +2,8 @@ require("mason").setup()
 
 require("mason-lspconfig").setup({
     ensure_installed = {
-        "terraform-ls",
-    }
+        "terraformls",
+    },
 })
 
 require("mason-tool-installer").setup({
