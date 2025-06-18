@@ -7,7 +7,7 @@
           "javascript",
           "typescript"
         ],
-        "path": "./js.json"
+        "path": "js.json"
       },
       {
         "language": "html",
@@ -15,11 +15,11 @@
       },
       {
         "language": "python",
-        "path": "./python.json"
+        "path": "python.json"
       },
       {
         "language": "toml",
-        "path": "./toml.json"
+        "path": "toml.json"
       },
       {
         "language": "all",
