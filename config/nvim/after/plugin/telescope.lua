@@ -16,4 +16,4 @@ vim.keymap.set("n", "<leader>sn", function()
 end, { desc = "[S]earch [N]eovim files" })
 
 require("telescope").setup()
--- require("telescope").load_extension("fzf")
+require("telescope").load_extension("fzf")
