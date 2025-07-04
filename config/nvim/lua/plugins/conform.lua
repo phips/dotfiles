@@ -17,9 +17,11 @@ return {
             formatters_by_ft = {
                 javascript = { "prettier" },
                 css = { "prettier" },
+                go = { "gofmt" },
                 html = { "prettier" },
                 json = { "jq" },
                 markdown = { "prettier" },
+                nginx = { "nginxfmt" },
                 lua = { "stylua" },
                 python = { "isort", "black" },
                 yaml = { "yamlfmt" },
