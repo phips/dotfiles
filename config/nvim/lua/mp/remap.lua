@@ -8,6 +8,7 @@ global.maplocalleader = "\\"
 
 vim.keymap.set("n", "<leader>fn", vim.cmd.Ex, { desc = "Explore" })
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "[L]azy" })
+vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "LSP diagnostic" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
