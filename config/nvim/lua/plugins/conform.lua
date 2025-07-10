@@ -5,7 +5,7 @@ return {
         local function get_stylua_path()
             if vim.fn.has("mac") == 1 then
                 return "/opt/homebrew/bin/stylua"
-            elseif vim.fn.has("unix") == 1 then
+            elseif vim.fn.has("bsd") == 1 then
                 return "/usr/local/bin/stylua"
             else
                 return "stylua" -- fallback to PATH
