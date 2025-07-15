@@ -26,6 +26,19 @@ export LESS_TERMCAP_ue=$'\e[0m'                   # End underlined text
 export LESS_TERMCAP_se=$'\e[0m'                   # End standout text
 export LESS="--RAW-CONTROL-CHARS"
 
+find_ssh_agent() {
+    for sock in $(fd -t s -o $(id -u) 'agent.*' /tmp); do
+        SSH_AUTH_SOCK=$sock ssh-add -l >/dev/null 2>&1
+        if [ $? -eq 0 -o $? -eq 1 ]; then
+            export SSH_AUTH_SOCK=$sock
+            echo "SSH agent found and configured."
+            return 0
+        fi
+    done
+    echo "No working SSH agent found."
+    return 1
+}
+
 if [ -d $HOME/perl5 ]; then
     PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
     PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
