@@ -19,6 +19,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+vim.keymap.set("n", "gr", ":read <cfile><CR>", { desc = "Read file under cursor" })
+
 if global.neovide then
     vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
     vim.keymap.set("v", "<D-c>", '"+y') -- Copy
