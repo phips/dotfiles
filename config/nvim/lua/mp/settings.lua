@@ -27,6 +27,7 @@ local options = {
     ttimeoutlen = 0, -- The time in milliseconds that is waited for a key code or mapped key sequence to complete.
     swapfile = false,
     wildmenu = true, -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
+    winborder = "rounded",
 }
 
 for k, v in pairs(options) do

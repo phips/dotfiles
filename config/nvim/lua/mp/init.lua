@@ -10,5 +10,5 @@ local is_neovim_0_11_plus = (version.major > 0 or (version.major == 0 and versio
 
 -- Only include the new LSP configuration if on Neovim 0.11+
 if is_neovim_0_11_plus then
-    vim.lsp.enable({ "ansible-language-server", "harper-ls", "tailwindcss-language-server" })
+    vim.lsp.enable({ "ansible-language-server", "tailwindcss-language-server" })
 end
