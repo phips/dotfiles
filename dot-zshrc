@@ -54,6 +54,7 @@ paths=(
   "$HOME/go/bin"
   "$HOME/.local/bin"
   "$HOME/perl5/bin"
+  "$HOME/.local/share/omarchy/bin"
 )
 for p in ${paths[@]}; do
   if [[ -d "$p" ]]; then
@@ -110,8 +111,8 @@ init_tool zoxide init zsh
 alias ez='nvim ~/.zshrc'
 alias rz='source ~/.zshrc'
 alias j=jobs
-alias lr='ls -FartlG'
-alias l='eza -lh --group-directories-first --icons=auto'
+alias lr='eza -lahrg --group-directories-first --icons=auto'
+alias l='eza -lahg --group-directories-first --icons=auto'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
