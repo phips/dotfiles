@@ -101,8 +101,9 @@ else
 fi
 
 init_tool starship init zsh
-init_tool fzf --zsh
+#init_tool fzf --zsh
 init_tool zoxide init zsh
+init_tool atuin init zsh --disable-up-arrow
 
 [ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
