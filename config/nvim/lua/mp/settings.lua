@@ -18,6 +18,7 @@ local options = {
     shiftwidth = 4, -- Number of spaces to use for each step of (auto)indent.
     showcmd = true, -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
     showmatch = true, -- When a bracket is inserted, briefly jump to the matching one.
+    spelllang = "en_gb",
     splitright = true,
     splitbelow = true, -- When on, splitting a window will put the new window below the current one
     syntax = "on", -- When this option is set, the syntax with this name is loaded.
