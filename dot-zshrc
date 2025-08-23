@@ -108,29 +108,28 @@ init_tool zoxide init zsh
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
 
 # aliases
+alias batt='cat /sys/class/power_supply/BAT*/capacity'
+alias cd="zd"
+alias claude="/home/markp/.claude/local/claude"
 alias ez='nvim ~/.zshrc'
-alias rz='source ~/.zshrc'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias g='git'
 alias j=jobs
 alias lr='eza -lahrg --group-directories-first --icons=auto'
 alias l='eza -lahg --group-directories-first --icons=auto'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
-alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
-alias cd="zd"
+alias rz='source ~/.zshrc'
 
 # Directories
-alias ..= 'cd ..'
-alias ...= 'cd ../..'
-alias ....= 'cd ../../..'
-
-# Tools
-alias v='nvim'
-alias g='git'
+alias ..= 'zd ..'
+alias ...= 'zd ../..'
+alias ....= 'zd ../../..'
 
 # Git
+alias gp='git pull'
 alias gcm='git commit -m'
 alias gcam='git commit -a -m'
 alias gcad='git commit -a --amend'
-alias claude="/home/markp/.claude/local/claude"
 
