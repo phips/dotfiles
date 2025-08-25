@@ -54,6 +54,8 @@ paths=(
   "$HOME/go/bin"
   "$HOME/.local/bin"
   "$HOME/perl5/bin"
+  "/opt/homebrew/bin/"
+  "/opt/homebrew/sbin/"
   "$HOME/.local/share/omarchy/bin"
 )
 for p in ${paths[@]}; do
@@ -107,6 +109,14 @@ init_tool atuin init zsh --disable-up-arrow
 
 [ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+
+# mac only
+if [ $(uname -o) = 'Darwin' ]; then
+    alias bubo='brew update && brew outdated'
+    alias bubu='brew update && brew upgrade'
+    alias lab='pgrep -lf firefox || open -a firefox && sleep 2; jupyter lab --browser=firefox ~/Jupyter'
+    export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+fi
 
 # aliases
 alias batt='cat /sys/class/power_supply/BAT*/capacity'
