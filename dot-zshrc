@@ -131,6 +131,7 @@ alias l='eza -lahg --group-directories-first --icons=auto'
 alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
+alias mpv='mpv -hwdec=vaapi'
 alias rz='source ~/.zshrc'
 
 # Directories
