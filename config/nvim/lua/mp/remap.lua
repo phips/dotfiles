@@ -38,3 +38,6 @@ vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true 
 
 -- write to root owned files
 vim.keymap.set("c", "w!!", "w !doas tee > /dev/null %", { silent = true, desc = "Doas root write" })
+
+-- correct spelling :set spell
+vim.keymap.set("n", "<leader>c", "1z=", { desc = "Take first suggested spelling correction" })
