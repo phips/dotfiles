@@ -107,13 +107,18 @@ else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
 
-init_tool starship init zsh
-#init_tool fzf --zsh
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+type starship_zle-keymap-select >/dev/null || \
+  {
+    eval "$(starship init zsh)"
+  }
 init_tool zoxide init zsh
 init_tool atuin init zsh --disable-up-arrow
 
 [ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+[ -f $HOME/ls_colours ] && source $HOME/ls_colours
 
 # mac only
 if [ $(uname -o) = 'Darwin' ]; then
