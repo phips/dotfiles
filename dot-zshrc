@@ -8,12 +8,16 @@ autoload -Uz compinit && compinit
 bindkey -e
 setopt braceccl               # expand num ranges {1..4}
 setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
-setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_ignore_all_dups   # delete old recorded entry if new entry is a duplicate
+setopt hist_save_no_dups      # don't write duplicate entries in the history file
+setopt hist_find_no_dups      # don't display a line previously found
 setopt hist_verify            # show command with history expansion to user before running it
-setopt share_history          # share command history across active sessions
+setopt share_history          # share command history data
 setopt autocd
+setopt vi
 
 export LESS_TERMCAP_us=$'\e[01;38;5;208m'         # Underlined text
 export LESS_TERMCAP_mb=$'\e[01;38;5;196m'         # Bold text
@@ -26,6 +30,19 @@ export LESS_TERMCAP_ue=$'\e[0m'                   # End underlined text
 export LESS_TERMCAP_se=$'\e[0m'                   # End standout text
 export LESS="--RAW-CONTROL-CHARS"
 
+find_ssh_agent() {
+    for sock in $(fd -t s -o $(id -u) 'agent.*' /tmp); do
+        SSH_AUTH_SOCK=$sock ssh-add -l >/dev/null 2>&1
+        if [ $? -eq 0 -o $? -eq 1 ]; then
+            export SSH_AUTH_SOCK=$sock
+            echo "SSH agent found and configured."
+            return 0
+        fi
+    done
+    echo "No working SSH agent found."
+    return 1
+}
+
 if [ -d $HOME/perl5 ]; then
     PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
     PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
@@ -36,15 +53,21 @@ fi
 
 paths=(
   "$HOME/go/bin"
-  "$HOME/.cargo/bin"
   "$HOME/.local/bin"
   "$HOME/perl5/bin"
+  "/opt/homebrew/bin/"
+  "/opt/homebrew/sbin/"
+  "$HOME/.local/share/omarchy/bin"
 )
 for p in ${paths[@]}; do
   if [[ -d "$p" ]]; then
     PATH="$PATH:$p"
   fi
 done
+
+if command -v doas >/dev/null 2>&1; then
+    export SUDO="doas"
+fi
 
 EDITOR="vi"
 if command -v nvim >/dev/null 2>&1; then
@@ -53,10 +76,24 @@ if command -v nvim >/dev/null 2>&1; then
 fi
 export EDITOR PATH
 
+zd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~ && return
+  elif [ -d "$1" ]; then
+    builtin cd "$1"
+  else
+    z "$@" && printf " \U000F17A9 " && pwd || echo "Error: Directory not found"
+  fi
+}
+
+open() {
+  xdg-open "$@" >/dev/null 2>&1
+}
+
 init_tool() {
   local tool=$1
   shift
-  
+
   if command -v "$tool" >/dev/null 2>&1; then
     eval "$($tool "$@")"
   fi
@@ -70,17 +107,57 @@ else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
 
-init_tool starship init zsh
-init_tool fzf --zsh
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+type starship_zle-keymap-select >/dev/null || \
+    {
+        eval "$(starship init zsh)"
+    }
 init_tool zoxide init zsh
+init_tool atuin init zsh --disable-up-arrow
 
 [ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+[ -f $HOME/ls_colours ] && source $HOME/ls_colours
+
+# mac only
+if [ $(uname -o) = 'Darwin' ]; then
+    alias bubo='brew update && brew outdated'
+    alias bubu='brew update && brew upgrade'
+    alias lab='pgrep -lf firefox || open -a firefox && sleep 2; jupyter lab --browser=firefox ~/Jupyter'
+    export STARSHIP_CONFIG="$HOME/.config/starship.toml"
+fi
+
+if command -v "eza" >/dev/null 2>&1; then
+    alias l="eza -lahg --group-directories-first --icons=auto"
+    alias lr="eza -lahrg --group-directories-first --icons=auto"
+    alias lt="eza --tree --level=2 --long --icons --git"
+    alias lta='lt -a'
+else
+    alias l='ls -laFG'
+    alias lr='ls -FartlG'
+fi
 
 # aliases
+alias batt='cat /sys/class/power_supply/BAT*/capacity'
+alias cd="zd"
+alias claude="/home/markp/.claude/local/claude"
 alias ez='nvim ~/.zshrc'
-alias rz='source ~/.zshrc'
+alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
+alias g='git'
+[ $(uname) = 'Linux' ] && alias h='exec hyprland'
 alias j=jobs
-alias l='ls -GlaF'
-alias lr='ls -FartlG'
+alias mpv='mpv -hwdec=vaapi'
+alias rz='source ~/.zshrc'
+
+# Directories
+alias ..= 'zd ..'
+alias ...= 'zd ../..'
+alias ....= 'zd ../../..'
+
+# Git
+alias gp='git pull'
+alias gcm='git commit -m'
+alias gcam='git commit -a -m'
+alias gcad='git commit -a --amend'
 

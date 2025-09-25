@@ -14,4 +14,4 @@ Open tmux, `ctrl-b I`
 
 ## neovim
 
-Open it. Plugins should load. Might want to run :Mason and install LSPs.
+Open it. Plugins should load. Might want to run :Mason and install LSPs. A bit more [info on my config choices](config/nvim/README.md).

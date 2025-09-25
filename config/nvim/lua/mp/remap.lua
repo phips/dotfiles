@@ -8,6 +8,7 @@ global.maplocalleader = "\\"
 
 vim.keymap.set("n", "<leader>fn", vim.cmd.Ex, { desc = "Explore" })
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "[L]azy" })
+vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "LSP diagnostic" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -17,6 +18,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("n", "gr", ":read <cfile><CR>", { desc = "Read file under cursor" })
 
 if global.neovide then
     vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
@@ -35,3 +38,6 @@ vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true 
 
 -- write to root owned files
 vim.keymap.set("c", "w!!", "w !doas tee > /dev/null %", { silent = true, desc = "Doas root write" })
+
+-- correct spelling :set spell
+vim.keymap.set("n", "<leader>c", "1z=", { desc = "Take first suggested spelling correction" })
