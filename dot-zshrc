@@ -145,7 +145,7 @@ alias claude="/home/markp/.claude/local/claude"
 alias ez='nvim ~/.zshrc'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias g='git'
-[ $(uname) = 'Linux' ] && alias h='exec hyprland'
+[ $(uname) = 'Linux' ] && alias h='dbus-run-session hyprland'
 alias j=jobs
 alias mpv='mpv -hwdec=vaapi'
 alias rz='source ~/.zshrc'
