@@ -141,7 +141,7 @@ fi
 # aliases
 alias batt='cat /sys/class/power_supply/BAT*/capacity'
 alias cd="zd"
-alias claude="/home/markp/.claude/local/claude"
+alias claude="~/.claude/local/claude"
 alias ez='nvim ~/.zshrc'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias g='git'
