@@ -128,16 +128,6 @@ if [ $(uname -o) = 'Darwin' ]; then
     export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 fi
 
-if command -v "eza" >/dev/null 2>&1; then
-    alias l="eza -lahg --group-directories-first --icons=auto"
-    alias lr="eza -lahrg --group-directories-first --icons=auto"
-    alias lt="eza --tree --level=2 --long --icons --git"
-    alias lta='lt -a'
-else
-    alias l='ls -laFG'
-    alias lr='ls -FartlG'
-fi
-
 # aliases
 alias batt='cat /sys/class/power_supply/BAT*/capacity'
 alias cd="zd"
@@ -147,6 +137,8 @@ alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias g='git'
 [ $(uname) = 'Linux' ] && alias h='dbus-run-session hyprland'
 alias j=jobs
+alias l='ls -laFG'
+alias lr='ls -FartlG'
 alias mpv='mpv -hwdec=vaapi'
 alias rz='source ~/.zshrc'
 
