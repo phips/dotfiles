@@ -13,6 +13,7 @@ map("n", "<leader>w", "<Cmd>update<CR>", { desc = "[W]rite" })
 map("n", "<leader>p", "<Cmd>e #<CR>", { desc = "Open [p]revious buffer" })
 map("n", "<leader>P", "<Cmd>bot sf #<CR>", { desc = "Split with [p]revious buffer" })
 
+map("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true })
 map("n", "grf", ":read <cfile><CR>", { desc = "Read file under cursor" })
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
