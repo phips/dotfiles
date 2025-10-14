@@ -152,4 +152,6 @@ alias gp='git pull'
 alias gcm='git commit -m'
 alias gcam='git commit -a -m'
 alias gcad='git commit -a --amend'
-
+if command -v "lazygit" >/dev/null 2>&1; then
+    alias lg=lazygit
+fi
