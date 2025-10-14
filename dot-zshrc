@@ -17,6 +17,7 @@ setopt hist_find_no_dups      # don't display a line previously found
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 setopt autocd
+setopt vi
 
 export LESS_TERMCAP_us=$'\e[01;38;5;208m'         # Underlined text
 export LESS_TERMCAP_mb=$'\e[01;38;5;196m'         # Bold text
@@ -64,6 +65,10 @@ for p in ${paths[@]}; do
   fi
 done
 
+if command -v doas >/dev/null 2>&1; then
+    export SUDO="doas"
+fi
+
 EDITOR="vi"
 if command -v nvim >/dev/null 2>&1; then
   EDITOR="nvim"
@@ -96,18 +101,24 @@ init_tool() {
 
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
-elif [[ "$TERM" == "tmux-256color" || "$TERM" == "xterm-ghostty" ]]; then
+elif [ "$TERM" = "tmux-256color" -o "$TERM" = "xterm-ghostty" -o "$TERM" = "xterm-256color" ]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gruvbox.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
 
-init_tool starship init zsh
+# Check that the function `starship_zle-keymap-select()` is defined.
+# xref: https://github.com/starship/starship/issues/3418
+type starship_zle-keymap-select >/dev/null || \
+    {
+        eval "$(starship init zsh)"
+    }
 init_tool zoxide init zsh
 init_tool atuin init zsh --disable-up-arrow
 
 [ -f $HOME/py3/bin/activate ] && source $HOME/py3/bin/activate
 [ -f $HOME/.cargo/env ] && source $HOME/.cargo/env
+[ -f $HOME/ls_colours ] && source $HOME/ls_colours
 
 # mac only
 if [ $(uname -o) = 'Darwin' ]; then
@@ -120,16 +131,14 @@ fi
 # aliases
 alias batt='cat /sys/class/power_supply/BAT*/capacity'
 alias cd="zd"
-alias claude="/home/markp/.claude/local/claude"
+alias claude="~/.claude/local/claude"
 alias ez='nvim ~/.zshrc'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias g='git'
+[ $(uname) = 'Linux' ] && alias h='dbus-run-session hyprland'
 alias j=jobs
-alias lr='eza -lahrg --group-directories-first --icons=auto'
-alias l='eza -lahg --group-directories-first --icons=auto'
-alias lsa='ls -a'
-alias lt='eza --tree --level=2 --long --icons --git'
-alias lta='lt -a'
+alias l='ls -laFG'
+alias lr='ls -FartlG'
 alias mpv='mpv -hwdec=vaapi'
 alias rz='source ~/.zshrc'
 
