@@ -94,16 +94,15 @@ init_tool() {
   fi
 }
 
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
-elif [ "$TERM" = "tmux-256color" ]; then
+elif [[ "$TERM" == "tmux-256color" || "$TERM" == "xterm-ghostty" ]]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gruvbox.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
 
 init_tool starship init zsh
-#init_tool fzf --zsh
 init_tool zoxide init zsh
 init_tool atuin init zsh --disable-up-arrow
 
