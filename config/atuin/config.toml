@@ -182,38 +182,40 @@ enter_accept = false
 
 [stats]
 ## Set commands where we should consider the subcommand for statistics. Eg, kubectl get vs just kubectl
-# common_subcommands = [
-#   "apt",
-#   "cargo",
+common_subcommands = [
+  "pkg",
+  "cargo",
 #   "composer",
 #   "dnf",
 #   "docker",
-#   "git",
-#   "go",
+  "git",
+  "go",
 #   "ip",
 #   "jj",
 #   "kubectl",
 #   "nix",
 #   "nmcli",
-#   "npm",
+  "npm",
 #   "pecl",
 #   "pnpm",
-#   "podman",
+  "podman",
 #   "port",
-#   "systemctl",
+  "systemctl",
+  "system",
 #   "tmux",
 #   "yarn",
-# ]
+]
 
 ## Set commands that should be totally stripped and ignored from stats
 # common_prefix = ["sudo"]
 
 ## Set commands that will be completely ignored from stats
-# ignored_commands = [
-#   "cd",
-#   "ls",
-#   "vi"
-# ]
+ignored_commands = [
+  "cd",
+  "l",
+  "v",
+  "z"
+]
 
 [keys]
 # Defaults to true. If disabled, using the up/down key won't exit the TUI when scrolled past the first/last entry.
