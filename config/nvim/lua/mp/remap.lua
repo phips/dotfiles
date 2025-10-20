@@ -1,33 +1,34 @@
 -- lua/mp/remap.lua
 local global = vim.g
+local map = vim.keymap.set
 
 -- Editor options
-
 global.mapleader = " "
 global.maplocalleader = "\\"
 
-vim.keymap.set("n", "<leader>fn", vim.cmd.Ex, { desc = "Explore" })
-vim.keymap.set("n", "<leader>L", vim.cmd.Lazy, { desc = "[L]azy" })
-vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "LSP diagnostic" })
+map("n", "<leader>fn", vim.cmd.Ex, { desc = "Explore" })
+map("n", "<leader>i", vim.diagnostic.open_float, { desc = "LSP diagnostic" })
+map("n", "<leader>L", vim.cmd.Lazy, { desc = "[L]azy" })
+map("n", "<leader>w", "<Cmd>update<CR>", { desc = "[W]rite" })
+map("n", "<leader>p", "<Cmd>e #<CR>", { desc = "Open [p]revious buffer" })
+map("n", "<leader>P", "<Cmd>bot sf #<CR>", { desc = "Split with [p]revious buffer" })
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("n", "gr", ":read <cfile><CR>", { desc = "Read file under cursor" })
+map("n", "<ESC>", ":nohlsearch<CR>", { noremap = true, silent = true })
+map("n", "grf", ":read <cfile><CR>", { desc = "Read file under cursor" })
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 if global.neovide then
-    vim.keymap.set("n", "<D-s>", ":w<CR>") -- Save
-    vim.keymap.set("v", "<D-c>", '"+y') -- Copy
-    vim.keymap.set("n", "<D-v>", '"+P') -- Paste normal mode
-    vim.keymap.set("v", "<D-v>", '"+P') -- Paste visual mode
-    vim.keymap.set("c", "<D-v>", "<C-R>+") -- Paste command mode
-    vim.keymap.set("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
+    map("n", "<D-s>", ":w<CR>") -- Save
+    map("v", "<D-c>", '"+y') -- Copy
+    map("n", "<D-v>", '"+P') -- Paste normal mode
+    map("v", "<D-v>", '"+P') -- Paste visual mode
+    map("c", "<D-v>", "<C-R>+") -- Paste command mode
+    map("i", "<D-v>", '<ESC>l"+Pli') -- Paste insert mode
 end
 
 -- Allow clipboard copy paste in neovim
@@ -37,7 +38,7 @@ vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true 
 vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
 
 -- write to root owned files
-vim.keymap.set("c", "w!!", "w !doas tee > /dev/null %", { silent = true, desc = "Doas root write" })
+map("c", "w!!", "w !doas tee > /dev/null %", { silent = true, desc = "Doas root write" })
 
 -- correct spelling :set spell
-vim.keymap.set("n", "<leader>c", "1z=", { desc = "Take first suggested spelling correction" })
+map("n", "<leader>c", "1z=", { desc = "Take first suggested spelling correction" })

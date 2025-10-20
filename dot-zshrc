@@ -99,9 +99,9 @@ init_tool() {
   fi
 }
 
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
-elif [ "$TERM" = "tmux-256color" ]; then
+elif [ "$TERM" = "tmux-256color" -o "$TERM" = "xterm-ghostty" -o "$TERM" = "xterm-256color" ]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gruvbox.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
@@ -128,25 +128,17 @@ if [ $(uname -o) = 'Darwin' ]; then
     export STARSHIP_CONFIG="$HOME/.config/starship.toml"
 fi
 
-if command -v "eza" >/dev/null 2>&1; then
-    alias l="eza -lahg --group-directories-first --icons=auto"
-    alias lr="eza -lahrg --group-directories-first --icons=auto"
-    alias lt="eza --tree --level=2 --long --icons --git"
-    alias lta='lt -a'
-else
-    alias l='ls -laFG'
-    alias lr='ls -FartlG'
-fi
-
 # aliases
 alias batt='cat /sys/class/power_supply/BAT*/capacity'
 alias cd="zd"
-alias claude="/home/markp/.claude/local/claude"
+alias claude="~/.claude/local/claude"
 alias ez='nvim ~/.zshrc'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias g='git'
-[ $(uname) = 'Linux' ] && alias h='exec hyprland'
+[ $(uname) = 'Linux' ] && alias h='dbus-run-session hyprland'
 alias j=jobs
+alias l='ls -laFG'
+alias lr='ls -FartlG'
 alias mpv='mpv -hwdec=vaapi'
 alias rz='source ~/.zshrc'
 
@@ -160,4 +152,6 @@ alias gp='git pull'
 alias gcm='git commit -m'
 alias gcam='git commit -a -m'
 alias gcad='git commit -a --amend'
-
+if command -v "lazygit" >/dev/null 2>&1; then
+    alias lg=lazygit
+fi
