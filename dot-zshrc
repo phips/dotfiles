@@ -102,7 +102,7 @@ init_tool() {
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
 elif [ "$TERM" = "tmux-256color" -o "$TERM" = "xterm-ghostty" -o "$TERM" = "xterm-256color" ]; then
-    export STARSHIP_CONFIG="$HOME/.config/starship/gruvbox.toml"
+    export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
