@@ -52,57 +52,57 @@ if [ -d $HOME/perl5 ]; then
 fi
 
 paths=(
-  "$HOME/go/bin"
-  "$HOME/.local/bin"
-  "$HOME/perl5/bin"
-  "/opt/homebrew/bin/"
-  "/opt/homebrew/sbin/"
-  "$HOME/.local/share/omarchy/bin"
+    "$HOME/go/bin"
+    "$HOME/.local/bin"
+    "$HOME/perl5/bin"
+    "/opt/homebrew/bin/"
+    "/opt/homebrew/sbin/"
+    "$HOME/.local/share/omarchy/bin"
 )
 for p in ${paths[@]}; do
-  if [[ -d "$p" ]]; then
-    PATH="$PATH:$p"
-  fi
+    if [[ -d "$p" ]]; then
+        PATH="$PATH:$p"
+    fi
 done
 
-if command -v doas >/dev/null 2>&1; then
+if type doas >/dev/null 2>&1; then
     export SUDO="doas"
 fi
 
 EDITOR="vi"
-if command -v nvim >/dev/null 2>&1; then
-  EDITOR="nvim"
-  alias v=nvim
+if type nvim >/dev/null 2>&1; then
+    EDITOR="nvim"
+    alias v=nvim
 fi
 export EDITOR PATH
 
 zd() {
-  if [ $# -eq 0 ]; then
-    builtin cd ~ && return
-  elif [ -d "$1" ]; then
-    builtin cd "$1"
-  else
-    z "$@" && printf " \U000F17A9 " && pwd || echo "Error: Directory not found"
-  fi
+    if [ $# -eq 0 ]; then
+        builtin cd ~ && return
+    elif [ -d "$1" ]; then
+        builtin cd "$1"
+    else
+        z "$@" && printf " \U000F17A9 " && pwd || echo "Error: Directory not found"
+    fi
 }
 
 open() {
-  xdg-open "$@" >/dev/null 2>&1
+    xdg-open "$@" >/dev/null 2>&1
 }
 
 init_tool() {
-  local tool=$1
-  shift
+    local tool=$1
+    shift
 
-  if command -v "$tool" >/dev/null 2>&1; then
-    eval "$($tool "$@")"
-  fi
+    if type "$tool" >/dev/null 2>&1; then
+        eval "$($tool "$@")"
+    fi
 }
 
 if [[ "$XDG_SESSION_TYPE" = "wayland" ]]; then
     export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
 elif [ "$TERM" = "tmux-256color" -o "$TERM" = "xterm-ghostty" -o "$TERM" = "xterm-256color" ]; then
-    export STARSHIP_CONFIG="$HOME/.config/starship/gruvbox.toml"
+    export STARSHIP_CONFIG="$HOME/.config/starship/gui.toml"
 else
     export STARSHIP_CONFIG="$HOME/.config/starship/plain.toml"
 fi
@@ -111,8 +111,8 @@ fi
 # xref: https://github.com/starship/starship/issues/3418
 type starship_zle-keymap-select >/dev/null || \
     {
-        eval "$(starship init zsh)"
-    }
+    eval "$(starship init zsh)"
+}
 init_tool zoxide init zsh
 init_tool atuin init zsh --disable-up-arrow
 
@@ -152,6 +152,6 @@ alias gp='git pull'
 alias gcm='git commit -m'
 alias gcam='git commit -a -m'
 alias gcad='git commit -a --amend'
-if command -v "lazygit" >/dev/null 2>&1; then
+if type "lazygit" >/dev/null 2>&1; then
     alias lg=lazygit
 fi

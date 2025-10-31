@@ -26,6 +26,7 @@ return {
                 python = { "isort", "black" },
                 yaml = { "yamlfmt" },
                 toml = { "tombi" },
+                zsh = { "beautysh" },
             },
             format_on_save = {
                 lsp_fallback = true,
