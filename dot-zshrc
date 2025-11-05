@@ -86,9 +86,11 @@ zd() {
     fi
 }
 
-open() {
-    xdg-open "$@" >/dev/null 2>&1
-}
+if [ $(uname) = 'Linux' ]; then
+    open() {
+        xdg-open "$@" >/dev/null 2>&1
+    }
+fi
 
 init_tool() {
     local tool=$1
