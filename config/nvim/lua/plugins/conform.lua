@@ -15,17 +15,18 @@ return {
 
         conform.setup({
             formatters_by_ft = {
-                javascript = { "prettier" },
                 css = { "prettier" },
                 go = { "gofmt" },
                 html = { "prettier" },
+                javascript = { "prettier" },
                 json = { "jq" },
+                lua = { "stylua" },
                 markdown = { "prettier" },
                 nginx = { "nginxfmt" },
-                lua = { "stylua" },
                 python = { "isort", "black" },
-                yaml = { "yamlfmt" },
+                sh = { "beautysh" },
                 toml = { "tombi" },
+                yaml = { "yamlfmt" },
                 zsh = { "beautysh" },
             },
             format_on_save = {
