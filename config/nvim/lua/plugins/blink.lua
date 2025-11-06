@@ -1,7 +1,15 @@
+local function get_fuzzy_implementation()
+    local uname = vim.loop.os_uname()
+    local is_freebsd_arm = uname.sysname == "FreeBSD" and uname.machine:match("^arm") or uname.machine:match("^aarch64")
+    return is_freebsd_arm and "lua" or "prefer_rust_with_warning"
+end
+
 return {
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
     version = "1.*",
+    -- In your blink.cmp config:
+    fuzzy = { implementation = get_fuzzy_implementation() },
     opts = {
         -- 'default' (recommended) for mappings similar to built-in completions
         -- (C-y to accept)
@@ -38,7 +46,10 @@ return {
         -- `implementation = "lua"` or fallback to the lua implementation, when
         -- the Rust fuzzy matcher is not available, by using `implementation =
         -- "prefer_rust"`
-        fuzzy = { implementation = "prefer_rust_with_warning" },
+        -- local uname = vim.loop.os_uname()
+
+        -- In your blink.cmp config:
+        fuzzy = { implementation = get_fuzzy_implementation() },
     },
     opts_extend = { "sources.default" },
 }
