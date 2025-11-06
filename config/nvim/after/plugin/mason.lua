@@ -1,5 +1,7 @@
 require("mason").setup()
 
+vim.keymap.set("n", "<leader>m", vim.cmd.Mason, { desc = "Mason" })
+
 -- require("mason-lspconfig").setup({
 --     ensure_installed = {
 --         "terraformls",
