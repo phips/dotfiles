@@ -25,7 +25,6 @@ return {
                 nginx = { "nginxfmt" },
                 python = { "isort", "black" },
                 sh = { "beautysh" },
-                toml = { "taplo" },
                 yaml = { "yamlfmt" },
                 zsh = { "beautysh" },
             },
