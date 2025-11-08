@@ -8,8 +8,6 @@ return {
     "saghen/blink.cmp",
     dependencies = { "rafamadriz/friendly-snippets" },
     version = "1.*",
-    -- In your blink.cmp config:
-    fuzzy = { implementation = get_fuzzy_implementation() },
     opts = {
         -- 'default' (recommended) for mappings similar to built-in completions
         -- (C-y to accept)
@@ -46,9 +44,6 @@ return {
         -- `implementation = "lua"` or fallback to the lua implementation, when
         -- the Rust fuzzy matcher is not available, by using `implementation =
         -- "prefer_rust"`
-        -- local uname = vim.loop.os_uname()
-
-        -- In your blink.cmp config:
         fuzzy = { implementation = get_fuzzy_implementation() },
     },
     opts_extend = { "sources.default" },
