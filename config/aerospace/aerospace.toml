@@ -168,25 +168,26 @@ automatically-unhide-macos-hidden-apps = false
     shift-down = ['volume set 0', 'mode main']
 
 [[on-window-detected]]
-if.app-id ='com.mitchellh.ghostty'
-run = ['move-node-to-workspace 1']
-
-[[on-window-detected]]
-if.app-id ='com.apple.Safari'
-run = ['move-node-to-workspace b']
-
-[[on-window-detected]]
-if.app-id ='com.hey.app.desktop'
-run = ['move-node-to-workspace m']
-
-[[on-window-detected]]
-if.app-id ='com.tradingview.tradingviewapp.desktop'
-run = ['move-node-to-workspace f']
-
-[[on-window-detected]]
-if.app-id ='com.vivaldi.Vivaldi'
-run = ['move-node-to-workspace e']
-
-[[on-window-detected]]
 if.app-id ='org.pqrs.Karabiner-Elements.Settings'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = "com.apple.finder"
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-id = "org.whispersystems.signal-desktop"
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.apple.MobileSMS"
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.culturedcode.ThingsMac"
+run = ["layout floating"]
+
+[[on-window-detected]]
+if.app-id = "com.anthropic.claudefordesktop"
+run = ["layout floating"]
+
